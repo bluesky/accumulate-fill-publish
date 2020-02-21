@@ -22,7 +22,7 @@ class EmittingDocumentRouter(DocumentRouter):
 
 class Accumulator(EmittingDocumentRouter):
     def __init__(self, callback):
-        super().__init__(callback)
+        super().__init__(callback=callback)
         self._cache = deque()
 
     def __call__(self, name, doc, validate=False):
@@ -63,7 +63,8 @@ def main():
     handler_registry = discover_handlers()
 
     def factory(name, doc):
-        filler = EmittingFiller(handler_registry, callback=publisher)
+        filler = EmittingFiller(handler_registry, inplace=False,
+                                callback=publisher)
         accumulator = Accumulator(callback=filler)
         return [accumulator], []
 

@@ -1,0 +1,6 @@
+bluesky
+event_model
+flake8
+ipython
+ophyd
+pytest

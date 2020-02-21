@@ -52,6 +52,12 @@ def main():
         help="bluesky-0MQ-proxy in address, given as in localhost:5578")
     args = parser.parse_args()
 
+    # Data flows through:
+    # * RemoteDispatcher (0MQ)
+    # * Accumulator (caches until stop doc is received)
+    # * EmittingFiller (fills external data)
+    # * Publisher (0MQ)
+
     publisher = Publisher(args.send_to)
 
     handler_registry = discover_handlers()

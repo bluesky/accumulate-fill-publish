@@ -34,6 +34,14 @@ In a fourth terminal, push some unfilled documents into port 5577.
 python generate_example_data.py
 ```
 
+or to send in live data:
+
+```
+from bluesky.callbacks.zmq import Publisher
+local_publisher = Publisher('localhost:5577')
+RE.subscribe(local_publisher)
+```
+
 In the terminal running `bluesky-0MQ-proxy 5577 5578`, we should see logs of
 unfilled documents received. In the terminal running
 `bluesky-0MQ-proxy 5579 5560` we should see logs filled documents (arrays of
